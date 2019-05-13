@@ -1,5 +1,7 @@
-FROM telegraf:alpine
+FROM telegraf:latest
 
-ADD telegraf.conf /etc/influxdb/
 
-CMD ["telegraf"]
+ADD telegraf.conf /tmp
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["telegraf --config /tmp/telegraf.conf"]
