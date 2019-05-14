@@ -18,7 +18,7 @@ pipeline {
       }
       steps {
         sh "docker tag telegraf fx8350:5000/telegraf:latest"
-        sh "docker tag leonhess/telegraf:latest"
+        sh "docker tag telegraf leonhess/telegraf:latest"
       }
     }
     stage('Push to Registries') {
