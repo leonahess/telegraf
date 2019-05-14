@@ -28,7 +28,7 @@ pipeline {
             label "Pi_3"
           }
           steps {
-            sh "docker push fx8350:5000/hs110:latest"
+            sh "docker push fx8350:5000/telegraf:latest"
           }
         }
         stage('Push to DockerHub') {
