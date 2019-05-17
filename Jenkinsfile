@@ -102,8 +102,8 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker rmi fx8350:5000/telegraf:arm"
-            sh "docker rmi leonhess/telegraf:arm"
+            sh "docker rmi fx8350:5000/telegraf:amd64"
+            sh "docker rmi leonhess/telegraf:amd64"
           }
         }
       }
