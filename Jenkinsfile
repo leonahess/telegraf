@@ -115,7 +115,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest create leonhess/telegraf:latest leonhess/telegraf:arm leonhess/telegraf:amd64"
+            sh "docker manifest create --amend leonhess/telegraf:latest leonhess/telegraf:arm leonhess/telegraf:amd64"
           }
         }
         /*
@@ -124,7 +124,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest create fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
+            sh "docker manifest create --amend fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
           }
         }
         */
