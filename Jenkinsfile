@@ -115,8 +115,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest create --amend leonhess/telegraf leonhess/telegraf:arm leonhess/telegraf:amd64"
-            sh "docker annotate leonhess/telegraf leonhess/telegraf:arm --os linux --arch arm"
+            sh "docker manifest create leonhess/telegraf leonhess/telegraf:arm leonhess/telegraf:amd64"
           }
         }
         /*
