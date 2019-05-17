@@ -120,35 +120,39 @@ pipeline {
         }
         /*
         stage('Create local Registry manifest') {
-          agent {
-            label "master"
-          }
-          steps {
-            sh "docker manifest create --amend fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
-          }
-        }
-        */
+        agent {
+        label "master"
       }
-    }
-    stage('Push Manifest') {
-      parallel {
-        stage('Create DockerHub manifest') {
-          agent {
-            label "master"
-          }
-          steps {
-            sh "docker manifest push -p leonhess/telegraf:latest"
-          }
-        }
-        stage('Create local Registry manifest') {
-          agent {
-            label "master"
-          }
-          steps {
-            sh "docker manifest push -p fx8350:5000/telegraf:latest"
-          }
-        }
-      }
+      steps {
+      sh "docker manifest create --amend fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
     }
   }
+  */
+}
+}
+stage('Push Manifest') {
+  parallel {
+    stage('Create DockerHub manifest') {
+      agent {
+        label "master"
+      }
+      steps {
+        withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
+          sh "docker manifest push -p leonhess/telegraf:latest"
+        }
+      }
+    }
+    /*
+    stage('Create local Registry manifest') {
+      agent {
+        label "master"
+      }
+      steps {
+        sh "docker manifest push -p fx8350:5000/telegraf:latest"
+      }
+    }
+    */
+  }
+}
+}
 }
