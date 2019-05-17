@@ -115,7 +115,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest create --amend leonhess/telegraf:latest leonhess/telegraf:arm leonhess/telegraf:amd64"
+            sh "docker manifest create --amend leonhess/telegraf leonhess/telegraf:arm leonhess/telegraf:amd64"
           }
         }
         /*
@@ -138,7 +138,7 @@ stage('Push Manifest') {
       }
       steps {
         withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
-          sh "docker manifest push -p leonhess/telegraf:latest"
+          sh "docker manifest push -p leonhess/telegraf"
         }
       }
     }
