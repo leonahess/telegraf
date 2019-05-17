@@ -118,6 +118,7 @@ pipeline {
             sh "docker manifest create leonhess/telegraf:latest leonhess/telegraf:arm leonhess/telegraf:amd64"
           }
         }
+        /*
         stage('Create local Registry manifest') {
           agent {
             label "master"
@@ -126,6 +127,7 @@ pipeline {
             sh "docker manifest create fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
           }
         }
+        */
       }
     }
     stage('Push Manifest') {
