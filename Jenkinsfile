@@ -135,7 +135,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest push leonhess/telegraf:latest"
+            sh "docker manifest push -p leonhess/telegraf:latest"
           }
         }
         stage('Create local Registry manifest') {
@@ -143,7 +143,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker manifest push fx8350:5000/telegraf:latest"
+            sh "docker manifest push -p fx8350:5000/telegraf:latest"
           }
         }
       }
