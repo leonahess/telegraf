@@ -125,7 +125,7 @@ pipeline {
       label "master"
     }
     steps {
-      sh "docker manifest create --insecure fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
+      sh "docker manifest create --amend --insecure fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
     }
   }
 
