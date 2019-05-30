@@ -1,0 +1,32 @@
+- hosts: database
+  tasks:
+    - name: Running the Container
+      docker_container:
+        image: fx8350:5000/telegraf:arm
+        name: telegraf
+        state: started
+        restart_policy: always
+        force_kill: yes
+        pull: yes
+        hostname: "{{ ansible_hostname }}"
+        volumes:
+          - /proc:/host:proc:ro
+          - /var/run/docker.sock:/var/run/docker.sock
+        env: HOST_PROC=/host/proc
+
+- hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: Running the Container
+      docker_container:
+        image: fx8350:5000/telegraf:amd64
+        name: telegraf
+        state: started
+        restart_policy: always
+        force_kill: yes
+        pull: yes
+        hostname: "{{ ansible_hostname }}"
+        volumes:
+          - /proc:/host:proc:ro
+          - /var/run/docker.sock:/var/run/docker.sock
+        env: HOST_PROC=/host/proc

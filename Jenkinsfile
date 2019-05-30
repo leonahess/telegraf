@@ -108,54 +108,67 @@ pipeline {
         }
       }
     }
-    stage('Create Manifest') {
-      parallel{
-        /*
-        stage('Create DockerHub manifest') {
-        agent {
-        label "master"
-      }
-      steps {
-      sh "docker manifest create leonhess/telegraf leonhess/telegraf:arm leonhess/telegraf:amd64"
-    }
-  }
-  */
-  stage('Create local Registry manifest') {
-    agent {
-      label "master"
-    }
-    steps {
-      sh "docker manifest create --amend --insecure fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
-    }
-  }
-
-}
-}
-stage('Push Manifest') {
-  parallel {
     /*
+    stage('Create Manifest') {
+    parallel{
+
     stage('Create DockerHub manifest') {
     agent {
     label "master"
   }
   steps {
-  withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
-  sh "docker manifest push leonhess/telegraf"
+  sh "docker manifest create leonhess/telegraf leonhess/telegraf:arm leonhess/telegraf:amd64"
 }
+}
+
+stage('Create local Registry manifest') {
+agent {
+label "master"
+}
+steps {
+sh "docker manifest create --amend --insecure fx8350:5000/telegraf:latest fx8350:5000/telegraf:arm fx8350:5000/telegraf:amd64"
+}
+}
+
+}
+}
+stage('Push Manifest') {
+parallel {
+
+stage('Create DockerHub manifest') {
+agent {
+label "master"
+}
+steps {
+withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
+sh "docker manifest push leonhess/telegraf"
+}
+}
+}
+
+
+stage('Create local Registry manifest') {
+agent {
+label "master"
+}
+steps {
+sh "docker manifest push -p fx8350:5000/telegraf:latest"
+}
+}
+
 }
 }
 */
-
-stage('Create local Registry manifest') {
+stage('Deploy') {
   agent {
     label "master"
   }
   steps {
-    sh "docker manifest push -p fx8350:5000/telegraf:latest"
+    ansiblePlaybook(
+      playbook: 'deploy.yml',
+      credentialsId: 'd4eb3f5d-d0f5-4964-8bad-038f0d774551'
+      )
+    }
   }
-}
-
-}
-}
 }
 }
