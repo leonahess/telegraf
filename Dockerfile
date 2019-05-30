@@ -1,6 +1,6 @@
 FROM telegraf:latest
 
-ADD telegraf.conf /tmp/
+ADD telegraf.conf .
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["telegraf --config-directory=tmp"]
+CMD ['telegraf --config="/telegraf.conf"']
