@@ -1,4 +1,4 @@
-FROM telegraf:latest
+FROM sebd/telegraf-rpi:latest
 
 ADD telegraf_arm.conf .
 
