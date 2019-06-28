@@ -8,6 +8,7 @@
         restart_policy: always
         force_kill: yes
         pull: yes
+        privileged: yes
         hostname: "{{ ansible_hostname }}"
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
