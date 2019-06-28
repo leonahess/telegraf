@@ -11,7 +11,7 @@ pipeline {
             label "Pi_3"
           }
           steps {
-            sh "docker build -t telegraf ."
+            sh "docker build -t telegraf Dockerfile_arm"
           }
         }
         stage('Build amd64') {
@@ -19,7 +19,7 @@ pipeline {
             label "master"
           }
           steps {
-            sh "docker build -t telegraf ."
+            sh "docker build -t telegraf Dockerfile_amd64"
           }
         }
       }
