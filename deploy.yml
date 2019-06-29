@@ -13,6 +13,21 @@
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
 
+- hosts: Pi4
+  tasks:
+    - name: Running the Container
+      docker_container:
+        image: fx8350:5000/telegraf:arm
+        name: telegraf
+        state: started
+        restart_policy: always
+        force_kill: yes
+        pull: yes
+        privileged: yes
+        hostname: "{{ ansible_hostname }}"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+
 - hosts: 127.0.0.1
   connection: local
   tasks:
