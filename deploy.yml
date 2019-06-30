@@ -1,4 +1,4 @@
-- hosts: database
+- hosts: Pi3B
   tasks:
     - name: Running the Container
       docker_container:
