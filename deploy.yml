@@ -42,3 +42,17 @@
         hostname: "{{ ansible_hostname }}"
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
+
+- hosts: amd64
+  tasks:
+    - name: Running the Container
+      docker_container:
+        image: fx8350:5000/telegraf:amd64
+        name: telegraf
+        state: started
+        restart_policy: always
+        force_kill: yes
+        pull: yes
+        hostname: "{{ ansible_hostname }}"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
